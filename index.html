@@ -74,6 +74,7 @@
         .logo span {
             color: var(--accent-color);
         }
+        
         .nav-links {
             display: flex;
             gap: 25px;
@@ -85,6 +86,27 @@
         }
         .nav-links a:hover {
             color: var(--accent-color);
+        }
+
+        /* ハンバーガーボタン（PCでは非表示） */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 18px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            border-radius: 3px;
+            transition: all 0.3s ease-in-out;
         }
 
         /* === 1. ヒーローセクション === */
@@ -527,7 +549,6 @@
 
         /* === レスポンシブ === */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
             section { padding: 60px 5%; }
             .hero h1 { font-size: 32px; }
             .hero p { font-size: 15px; }
@@ -535,6 +556,45 @@
             .course-table th { border-bottom: none; }
             .tab-btn { padding: 10px 16px; font-size: 14px; width: 48%; text-align: center; }
             .tabs { justify-content: space-between; }
+
+            /* --- ハンバーガーメニュー用のスタイル --- */
+            .hamburger {
+                display: flex; /* スマホでボタンを表示 */
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+            }
+            /* メニューが開いた状態 */
+            .nav-links.open {
+                max-height: 300px;
+                padding: 15px 0;
+            }
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+            }
+            /* ハンバーガーアイコンのバツ印アニメーション */
+            .hamburger.open span:nth-child(1) {
+                transform: translateY(7.5px) rotate(45deg);
+            }
+            .hamburger.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.open span:nth-child(3) {
+                transform: translateY(-7.5px) rotate(-45deg);
+            }
         }
     </style>
 </head>
@@ -543,11 +603,19 @@
     <!-- ヘッダー -->
     <header>
         <div class="logo">湯口塾<span>高校部</span></div>
-        <nav class="nav-links">
-            <a href="#classrooms">教室紹介</a>
-            <a href="#courses">コース紹介</a>
-            <a href="#results">合格実績</a>
-            <a href="#access">アクセス</a>
+        
+        <!-- ハンバーガーボタン -->
+        <button class="hamburger" id="hamburger-btn" aria-label="メニューを開閉する">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-links" id="nav-menu">
+            <a href="#classrooms" class="nav-item">教室紹介</a>
+            <a href="#courses" class="nav-item">コース紹介</a>
+            <a href="#results" class="nav-item">合格実績</a>
+            <a href="#access" class="nav-item">アクセス</a>
         </nav>
     </header>
 
@@ -557,9 +625,9 @@
             <h1 class="animate-up">湯口塾<span>高校部</span></h1>
             <p class="animate-up" style="transition-delay: 0.1s;">40年以上蓄積された確かな経験と実績で<br>子供たちをしっかりサポート</p>
             
-            <!-- ローカルの画像を読み込む設定 -->
+            <!-- ローカルの画像を読み込む設定（修正箇所） -->
             <div class="hero-achievement-img animate-up" style="transition-delay: 0.2s;">
-                <img src="./26合格実績①.png" alt="大学合格実績">
+                <img src="./26sokuhou.jpg" alt="大学合格実績">
             </div>
 
             <div class="notice-board animate-up" style="transition-delay: 0.3s;">
@@ -720,7 +788,6 @@
                     </tr>
                 </table>
                 
-                <!-- 【変更】代ゼミサテラインへのテキストリンク -->
                 <div style="text-align: center; margin-top: 20px;">
                     <a href="https://sateline.yozemi.ac.jp/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: var(--accent-color); color: #fff; padding: 12px 24px; border-radius: 30px; font-weight: bold; font-size: 15px; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
                         代ゼミサテライン予備校 公式サイトへ
@@ -814,7 +881,8 @@
 
         </div>
     </section>
-<!-- 5. アクセスセクション -->
+
+    <!-- 5. アクセスセクション -->
     <section id="access" class="access">
         <h2 class="section-title animate-up">アクセス</h2>
         <p class="section-desc animate-up">教室へのアクセス情報です。お問い合わせはお電話にて承っております。</p>
@@ -865,6 +933,27 @@
 
     <!-- スクリプト -->
     <script>
+        // --- ハンバーガーメニュー開閉機能 ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const navMenu = document.getElementById('nav-menu');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            // ボタンクリックでメニューをトグル
+            hamburgerBtn.addEventListener('click', () => {
+                hamburgerBtn.classList.toggle('open');
+                navMenu.classList.toggle('open');
+            });
+
+            // メニューのリンクをクリックしたらメニューを閉じる
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    hamburgerBtn.classList.remove('open');
+                    navMenu.classList.remove('open');
+                });
+            });
+        });
+
         // --- スクロールアニメーション ---
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
