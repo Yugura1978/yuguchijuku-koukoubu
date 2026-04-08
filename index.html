@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>湯口塾高校部 | 確かな経験と実績で高校生をサポート</title>
+    <!-- Google Fonts: Noto Sans JP を追加 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         /* === 基本設定・変数 === */
         :root {
@@ -19,7 +23,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            /* 全体のフォントをモダンな Noto Sans JP に変更 */
+            font-family: 'Noto Sans JP', "Helvetica Neue", Arial, sans-serif;
         }
 
         body {
@@ -66,13 +71,17 @@
             box-shadow: 0 1px 10px rgba(0,0,0,0.05);
         }
         .logo {
-            font-size: 22px;
+            font-size: 24px; /* ロゴ全体を少しだけ大きく調整 */
             font-weight: 900;
             color: var(--text-color);
-            letter-spacing: 1px;
+            letter-spacing: 1.5px; /* 文字間隔を広げてかっこよく */
         }
         .logo span {
             color: var(--accent-color);
+            font-size: 65%; /* 「高校部」を小さく */
+            margin-left: 6px; /* 少し離す */
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         
         .nav-links {
@@ -80,9 +89,10 @@
             gap: 25px;
         }
         .nav-links a {
-            font-weight: bold;
+            font-weight: 700;
             font-size: 14px;
             transition: color 0.3s;
+            letter-spacing: 1px;
         }
         .nav-links a:hover {
             color: var(--accent-color);
@@ -142,9 +152,10 @@
         }
         .hero p {
             font-size: clamp(16px, 3vw, 22px);
-            font-weight: bold;
+            font-weight: 700;
             color: var(--text-color);
             line-height: 1.8;
+            letter-spacing: 0.5px;
         }
         
         .hero-achievement-img {
@@ -178,6 +189,7 @@
             border-radius: 20px;
             font-size: 12px;
             pointer-events: none;
+            letter-spacing: 0.5px;
         }
 
         /* お知らせパネル */
@@ -201,6 +213,8 @@
             gap: 8px;
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         .notice-list {
             list-style: none;
@@ -223,7 +237,7 @@
             padding: 4px 8px;
             border-radius: 4px;
             font-size: 11px;
-            font-weight: bold;
+            font-weight: 700;
             margin-right: 12px;
             color: #fff;
             white-space: nowrap;
@@ -243,6 +257,7 @@
             margin-bottom: 50px;
             color: var(--text-color);
             position: relative;
+            letter-spacing: 2px;
         }
         .section-title::after {
             content: '';
@@ -277,7 +292,7 @@
             font-size: 18px;
             margin-bottom: 30px;
             line-height: 1.8;
-            font-weight: bold;
+            font-weight: 700;
         }
         
         .school-tags {
@@ -289,10 +304,11 @@
         }
         .school-tags span {
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
             color: var(--text-color);
             display: inline-flex;
             align-items: center;
+            letter-spacing: 0.5px;
         }
         .school-tags span::before {
             content: '';
@@ -321,10 +337,11 @@
             color: var(--text-light);
             padding: 12px 24px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 700;
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
+            letter-spacing: 1px;
         }
         .tab-btn:hover {
             border-color: var(--accent-color);
@@ -365,6 +382,7 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
+            font-weight: 700;
         }
         .course-card h3 span {
             font-size: 13px;
@@ -372,7 +390,7 @@
             color: #fff;
             padding: 4px 10px;
             border-radius: 4px;
-            font-weight: normal;
+            font-weight: 500;
         }
         .course-table {
             width: 100%;
@@ -392,7 +410,7 @@
             background-color: #f1f3f5;
             width: 25%;
             color: var(--text-color);
-            font-weight: bold;
+            font-weight: 700;
         }
         .course-table td ul {
             padding-left: 20px;
@@ -428,6 +446,7 @@
             justify-content: space-between;
             align-items: center;
             transition: background-color 0.3s, color 0.3s;
+            letter-spacing: 1px;
         }
         .accordion-header:hover {
             background-color: #fdfdfd;
@@ -438,6 +457,7 @@
             font-size: 26px;
             color: var(--accent-color);
             transition: transform 0.3s ease;
+            font-weight: 400;
         }
         .accordion-item.active .accordion-header {
             background-color: var(--accent-color);
@@ -502,6 +522,8 @@
             border-bottom: 2px solid var(--accent-color);
             padding-bottom: 15px;
             display: inline-block;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         .access-card p {
             font-size: 15px;
@@ -511,7 +533,7 @@
         }
         .access-card .tel {
             font-size: 26px;
-            font-weight: bold;
+            font-weight: 900;
             color: var(--accent-color);
             margin-top: 25px;
             letter-spacing: 1px;
@@ -547,9 +569,10 @@
             padding: 10px 20px;
             border-radius: 30px;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 15px;
             transition: background-color 0.3s;
+            letter-spacing: 0.5px;
         }
         .map-link:hover {
             background-color: var(--accent-color);
