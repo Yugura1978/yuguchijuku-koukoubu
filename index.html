@@ -71,15 +71,15 @@
             box-shadow: 0 1px 10px rgba(0,0,0,0.05);
         }
         .logo {
-            font-size: 24px;
+            font-size: 24px; /* ロゴ全体を少しだけ大きく調整 */
             font-weight: 900;
             color: var(--text-color);
-            letter-spacing: 1.5px;
+            letter-spacing: 1.5px; /* 文字間隔を広げてかっこよく */
         }
         .logo span {
             color: var(--accent-color);
-            font-size: 65%;
-            margin-left: 6px;
+            font-size: 65%; /* 「高校部」を小さく */
+            margin-left: 6px; /* 少し離す */
             font-weight: 700;
             letter-spacing: 1px;
         }
@@ -98,6 +98,7 @@
             color: var(--accent-color);
         }
 
+        /* ハンバーガーボタン（PCでは非表示） */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -148,6 +149,9 @@
         }
         .hero h1 span {
             color: var(--accent-color);
+            background: linear-gradient(135deg, #ED1A3D, #ff6b81);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .hero p {
             font-size: clamp(16px, 3vw, 22px);
@@ -155,6 +159,10 @@
             color: var(--text-color);
             line-height: 1.8;
             letter-spacing: 0.5px;
+            text-shadow: 0px 2px 6px rgba(255, 255, 255, 0.9);
+        }
+        .hero p span {
+            color: var(--accent-color);
         }
         
         .hero-achievement-img {
@@ -171,12 +179,13 @@
             width: 100%;
             height: auto;
             object-fit: contain;
-            cursor: pointer;
+            cursor: pointer; /* クリック可能であることを示す */
             transition: transform 0.3s ease;
         }
         .hero-achievement-img img:hover {
-            transform: scale(1.02);
+            transform: scale(1.02); /* ホバー時に少し拡大 */
         }
+        /* 画像の右下に拡大アイコン風のテキストを追加する場合（今回はシンプルにホバーのみで対応） */
         .click-to-enlarge {
             position: absolute;
             bottom: 10px;
@@ -223,24 +232,20 @@
             padding-bottom: 12px;
             border-bottom: 1px dashed var(--border-color);
             display: flex;
-            align-items: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .notice-list li:last-child {
             margin-bottom: 0;
             border-bottom: none;
             padding-bottom: 0;
         }
-        .notice-meta {
-            display: flex;
-            align-items: center;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
         .notice-date {
             font-size: 13px;
             color: var(--text-light);
-            margin-right: 8px;
-            white-space: nowrap;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
         .badge {
             display: inline-block;
@@ -248,19 +253,18 @@
             border-radius: 4px;
             font-size: 11px;
             font-weight: 700;
+            margin-right: 12px;
             color: #fff;
             white-space: nowrap;
         }
         .badge-red { background-color: var(--accent-color); }
         .badge-blue { background-color: #0056b3; }
         .badge-green { background-color: #28a745; }
-        .notice-text {
-            flex: 1;
-            line-height: 1.5;
-        }
 
         /* === セクション共通 === */
-        section { padding: 100px 5%; }
+        section {
+            padding: 100px 5%;
+        }
         .section-title {
             text-align: center;
             font-size: 32px;
@@ -287,7 +291,9 @@
         }
 
         /* === 2. 教室紹介セクション === */
-        .classrooms { background-color: var(--bg-light); }
+        .classrooms {
+            background-color: var(--bg-light);
+        }
         .classroom-wrapper {
             max-width: 900px;
             margin: 0 auto;
@@ -297,65 +303,357 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             text-align: center;
         }
-        .classroom-wrapper p { font-size: 18px; margin-bottom: 30px; line-height: 1.8; font-weight: 700; }
-        .school-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px 30px; margin-top: 30px; }
-        .school-tags span { font-size: 16px; font-weight: 700; color: var(--text-color); display: inline-flex; align-items: center; letter-spacing: 0.5px; }
-        .school-tags span::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent-color); margin-right: 10px; }
+        .classroom-wrapper p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-weight: 700;
+        }
+        
+        .school-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px 30px;
+            margin-top: 30px;
+        }
+        .school-tags span {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-color);
+            display: inline-flex;
+            align-items: center;
+            letter-spacing: 0.5px;
+        }
+        .school-tags span::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent-color);
+            margin-right: 10px;
+        }
 
-        /* === 3. コース紹介セクション === */
-        .courses { background-color: var(--main-color); }
-        .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 40px; }
-        .tab-btn { background-color: var(--main-color); border: 2px solid var(--border-color); color: var(--text-light); padding: 12px 24px; font-size: 16px; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px; }
-        .tab-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
-        .tab-btn.active { background-color: var(--accent-color); border-color: var(--accent-color); color: #ffffff; }
+        /* === 3. コース紹介セクション (タブUI) === */
+        .courses {
+            background-color: var(--main-color);
+        }
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .tab-btn {
+            background-color: var(--main-color);
+            border: 2px solid var(--border-color);
+            color: var(--text-light);
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        .tab-btn:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        .tab-btn.active {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #ffffff;
+        }
 
-        .tab-content { display: none; animation: fadeIn 0.5s ease; max-width: 1000px; margin: 0 auto; }
-        .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        .course-card { background: var(--bg-light); border-radius: 8px; padding: 30px; margin-bottom: 25px; border-left: 6px solid var(--accent-color); box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .course-card h3 { font-size: 22px; margin-bottom: 20px; display: flex; align-items: center; flex-wrap: wrap; gap: 12px; font-weight: 700; }
-        .course-card h3 span { font-size: 13px; background: var(--text-color); color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 500; }
-        .course-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .course-table th, .course-table td { padding: 15px; border: 1px solid var(--border-color); text-align: left; font-size: 15px; }
-        .course-table th { background-color: #f1f3f5; width: 25%; color: var(--text-color); font-weight: 700; }
+        .course-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--accent-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .course-card h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-weight: 700;
+        }
+        .course-card h3 span {
+            font-size: 13px;
+            background: var(--text-color);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .course-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .course-table th, .course-table td {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            font-size: 15px;
+        }
+        .course-table th {
+            background-color: #f1f3f5;
+            width: 25%;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+        .course-table td ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        .course-table td ul li {
+            margin-bottom: 5px;
+        }
 
-        /* === 4. 合格実績セクション === */
-        .results { background-color: var(--bg-light); }
-        .accordion-wrapper { max-width: 900px; margin: 0 auto; }
-        .accordion-item { background-color: var(--main-color); border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-        .accordion-header { padding: 20px 25px; font-size: 20px; font-weight: 900; color: var(--text-color); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.3s, color 0.3s; letter-spacing: 1px; }
-        .accordion-header::after { content: '+'; font-size: 26px; color: var(--accent-color); transition: transform 0.3s ease; font-weight: 400; }
-        .accordion-item.active .accordion-header { background-color: var(--accent-color); color: #fff; }
-        .accordion-item.active .accordion-header::after { transform: rotate(45deg); color: #fff; }
-        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; background-color: var(--main-color); }
-        .accordion-item.active .accordion-content { max-height: 3000px; }
-        .accordion-body { padding: 30px; }
+        /* === 4. 合格実績セクション (アコーディオンUI) === */
+        .results {
+            background-color: var(--bg-light);
+        }
+        .accordion-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .accordion-item {
+            background-color: var(--main-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .accordion-header {
+            padding: 20px 25px;
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s, color 0.3s;
+            letter-spacing: 1px;
+        }
+        .accordion-header:hover {
+            background-color: #fdfdfd;
+            color: var(--accent-color);
+        }
+        .accordion-header::after {
+            content: '+';
+            font-size: 26px;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+            font-weight: 400;
+        }
+        .accordion-item.active .accordion-header {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+        .accordion-item.active .accordion-header::after {
+            transform: rotate(45deg);
+            color: #fff;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background-color: var(--main-color);
+        }
+        .accordion-item.active .accordion-content {
+            max-height: 3000px;
+        }
+        .accordion-body {
+            padding: 30px;
+        }
+        .accordion-body img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            background-color: #fff;
+            margin: 0 auto;
+        }
 
         /* === 5. アクセスセクション === */
-        .access { background-color: var(--main-color); }
-        .access-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 900px; margin: 0 auto; }
-        .access-card { background: var(--bg-light); border: 1px solid var(--border-color); border-radius: 8px; padding: 40px 30px; width: 100%; max-width: 430px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: transform 0.3s; }
-        .access-card h3 { font-size: 22px; color: var(--text-color); margin-bottom: 20px; border-bottom: 2px solid var(--accent-color); padding-bottom: 15px; display: inline-block; font-weight: 700; letter-spacing: 1px; }
-        .access-card p { font-size: 15px; color: var(--text-light); margin-bottom: 10px; line-height: 1.8; }
-        .access-card .tel { font-size: 26px; font-weight: 900; color: var(--accent-color); margin-top: 25px; letter-spacing: 1px; }
+        .access {
+            background-color: var(--main-color);
+        }
+        .access-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .access-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 430px; /* 地図が入るため少しだけ広めに */
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+        }
+        .access-card:hover {
+            transform: translateY(-5px);
+        }
+        .access-card h3 {
+            font-size: 22px;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 15px;
+            display: inline-block;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .access-card p {
+            font-size: 15px;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        .access-card .tel {
+            font-size: 26px;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-top: 25px;
+            letter-spacing: 1px;
+        }
+        .access-card .tel a {
+            color: inherit;
+            transition: opacity 0.3s;
+        }
+        .access-card .tel a:hover {
+            opacity: 0.7;
+        }
 
-        .map-wrapper { width: 100%; height: 250px; margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background-color: #eee; }
-        .map-wrapper iframe { width: 100%; height: 100%; border: none; display: block; }
-        .map-link { display: inline-block; background-color: var(--text-color); color: #fff; padding: 10px 20px; border-radius: 30px; font-size: 14px; font-weight: 700; margin-bottom: 15px; transition: background-color 0.3s; letter-spacing: 0.5px; }
-        .map-link:hover { background-color: var(--accent-color); color: #fff; }
+        /* 地図用の追加スタイル */
+        .map-wrapper {
+            width: 100%;
+            height: 250px;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background-color: #eee;
+        }
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        .map-link {
+            display: inline-block;
+            background-color: var(--text-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+            letter-spacing: 0.5px;
+        }
+        .map-link:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
 
-        /* モーダル */
-        .image-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; backdrop-filter: blur(5px); }
-        .image-modal.show { display: flex; opacity: 1; }
-        .modal-content { max-width: 95%; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); transform: scale(0.8); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .image-modal.show .modal-content { transform: scale(1); }
-        .modal-close { position: absolute; top: 20px; right: 30px; color: #ffffff; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 2001; }
+        /* === 画像拡大モーダル用スタイル === */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); /* 半透明の黒背景 */
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        .image-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            max-width: 95%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .image-modal.show .modal-content {
+            transform: scale(1);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 2001;
+        }
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #aaaaaa;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-        /* フッター */
-        footer { background-color: var(--text-color); color: #ffffff; text-align: center; padding: 30px 20px; font-size: 13px; }
+        /* === フッター === */
+        footer {
+            background-color: var(--text-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 13px;
+        }
 
-        /* レスポンシブ */
+        /* === レスポンシブ === */
         @media (max-width: 768px) {
             section { padding: 60px 5%; }
             .hero h1 { font-size: 32px; }
@@ -364,25 +662,67 @@
             .course-table th { border-bottom: none; }
             .tab-btn { padding: 10px 16px; font-size: 14px; width: 48%; text-align: center; }
             .tabs { justify-content: space-between; }
-            .notice-list li { flex-direction: column; }
-            .notice-meta { margin-bottom: 6px; }
-            .hamburger { display: flex; }
-            .nav-links { position: absolute; top: 100%; left: 0; width: 100%; background-color: rgba(255, 255, 255, 0.98); flex-direction: column; align-items: center; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; box-shadow: 0 10px 10px rgba(0,0,0,0.05); }
-            .nav-links.open { max-height: 300px; padding: 15px 0; }
-            .nav-links a { width: 100%; text-align: center; padding: 15px 0; }
-            .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
-            .hamburger.open span:nth-child(2) { opacity: 0; }
-            .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+            /* --- ハンバーガーメニュー用のスタイル --- */
+            .hamburger {
+                display: flex; /* スマホでボタンを表示 */
+            }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease, padding 0.3s ease;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.05);
+            }
+            /* メニューが開いた状態 */
+            .nav-links.open {
+                max-height: 300px;
+                padding: 15px 0;
+            }
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+            }
+            /* ハンバーガーアイコンのバツ印アニメーション */
+            .hamburger.open span:nth-child(1) {
+                transform: translateY(7.5px) rotate(45deg);
+            }
+            .hamburger.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.open span:nth-child(3) {
+                transform: translateY(-7.5px) rotate(-45deg);
+            }
+            
+            .modal-close {
+                top: 10px;
+                right: 20px;
+                font-size: 35px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- ヘッダー -->
     <header>
         <div class="logo">湯口塾<span>高校部</span></div>
+        
+        <!-- ハンバーガーボタン -->
         <button class="hamburger" id="hamburger-btn" aria-label="メニューを開閉する">
-            <span></span><span></span><span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
+
         <nav class="nav-links" id="nav-menu">
             <a href="#classrooms" class="nav-item">教室紹介</a>
             <a href="#courses" class="nav-item">コース紹介</a>
@@ -391,41 +731,24 @@
         </nav>
     </header>
 
+    <!-- 1. ヒーローセクション -->
     <section class="hero">
         <div class="hero-content">
-            <h1 class="animate-up">一人ひとりの志望校合格へ</h1>
-            <p class="animate-up" style="transition-delay: 0.1s;">40年以上蓄積された確かな経験と実績で<br>子供たちをしっかりサポート</p>
+            <h1 class="animate-up">一人ひとりの<span>志望校合格</span>へ</h1>
+            <p class="animate-up" style="transition-delay: 0.1s;">40年以上蓄積された確かな経験と実績で<br>子供たちを<span>しっかりサポート</span></p>
             
+            <!-- ローカルの画像を読み込む設定 -->
             <div class="hero-achievement-img animate-up" style="transition-delay: 0.2s;">
                 <img src="./26sokuhou.png" alt="大学合格実績" id="hero-img-trigger" title="クリックして拡大">
                 <span class="click-to-enlarge">🔍 タップで拡大</span>
             </div>
 
-            <!-- お知らせパネル（手動入力形式） -->
             <div class="notice-board animate-up" style="transition-delay: 0.3s;">
                 <h3>最新のお知らせ・休校情報</h3>
                 <ul class="notice-list">
-                    <li>
-                        <div class="notice-meta">
-                            <span class="notice-date">2026.04.08</span>
-                            <span class="badge badge-red">休校連絡</span>
-                        </div>
-                        <div class="notice-text">4/29(水)～5/5(火)はお休みです。</div>
-                    </li>
-                    <li>
-                        <div class="notice-meta">
-                            <span class="notice-date">2026.03.25</span>
-                            <span class="badge badge-blue">お知らせ</span>
-                        </div>
-                        <div class="notice-text">新年度のコース案内・体験授業の受付を随時行っています。</div>
-                    </li>
-                    <li>
-                        <div class="notice-meta">
-                            <span class="notice-date">2026.03.10</span>
-                            <span class="badge badge-green">合格速報</span>
-                        </div>
-                        <div class="notice-text">2025年度の大学合格実績を掲載しました。</div>
-                    </li>
+                    <li><span class="notice-date">2026.04.15</span><span class="badge badge-red">休校連絡</span> <div style="width: 100%;">4/29(水)～5/5(火)はお休みです。</div></li>
+                    <li><span class="notice-date">2026.04.08</span><span class="badge badge-blue">お知らせ</span> <div style="width: 100%;">新年度のコース案内・体験授業の受付を随時行っています。</div></li>
+                    <li><span class="notice-date">2026.03.20</span><span class="badge badge-green">合格速報</span> <div style="width: 100%;">2025年度の大学合格実績を掲載しました。</div></li>
                 </ul>
             </div>
         </div>
@@ -440,12 +763,21 @@
     <!-- 2. 教室紹介セクション -->
     <section id="classrooms" class="classrooms">
         <h2 class="section-title animate-up">教室紹介</h2>
+        
         <div class="classroom-wrapper animate-up">
             <p>湯口塾の高校生向けの授業は<br><span style="color:var(--accent-color); font-size: 22px;">高瀬本部教室</span>、<span style="color:var(--accent-color); font-size: 22px;">観音寺本部教室</span><br>で行われています。</p>
+            
             <p style="font-size: 15px; color: var(--text-light); font-weight: normal; margin-top: 20px;">対象高校は主に以下の通りです。</p>
+            
             <div class="school-tags">
-                <span>丸亀高校</span><span>坂出高校</span><span>観音寺第一高校</span><span>香川高専(詫間キャンパス)</span><span>高瀬高校</span><span>香川西高校(特進科)</span>
+                <span>丸亀高校</span>
+                <span>坂出高校</span>
+                <span>観音寺第一高校</span>
+                <span>香川高専(詫間キャンパス)</span>
+                <span>高瀬高校</span>
+                <span>香川西高校(特進科)</span>
             </div>
+                    
             <p style="font-size: 14px; color: var(--text-light); margin-top: 30px; font-weight: normal;">その他の高校につきましては、ご相談ください。</p>
         </div>
     </section>
@@ -453,110 +785,349 @@
     <!-- 3. コース紹介セクション -->
     <section id="courses" class="courses">
         <h2 class="section-title animate-up">コース紹介</h2>
+        <p class="section-desc animate-up">各高校の進度や目標に合わせた、最適な授業スケジュールをご用意しています。<br>詳しい曜日・時間・料金などはお問い合わせください。</p>
+
         <div class="tabs animate-up">
             <button class="tab-btn active" onclick="openTab(event, 'grade1')">高校1年生</button>
             <button class="tab-btn" onclick="openTab(event, 'grade2')">高校2年生</button>
             <button class="tab-btn" onclick="openTab(event, 'grade3')">高校3年生</button>
             <button class="tab-btn" onclick="openTab(event, 'kosen')">高専・その他</button>
         </div>
+
         <div id="grade1" class="tab-content active">
             <div class="course-card">
                 <h3>観音寺第一高校 クラス <span>観音寺本部・高瀬本部</span></h3>
                 <table class="course-table">
-                    <tr><th>ナイトクラス</th><td><ul><li><strong>英語・数学 (週3回)：</strong> 曜日・時間は各本部にお問い合わせください。</li></ul></td></tr>
+                    <tr>
+                        <th>イブニングクラス<br><small>※観音寺本部のみ</small></th>
+                        <td><ul><li><strong>英語・数学 (各週2回)：</strong> 曜日・時間は各本部にお問い合わせください。</li></ul></td>
+                    </tr>
+                    <tr>
+                        <th>ナイトクラス</th>
+                        <td><ul><li><strong>英語・数学 (週3回)：</strong> 曜日・時間は各本部にお問い合わせください。</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="course-card">
+                <h3>丸亀高校・坂出高校 クラス <span>高瀬本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>高校ACT (ナイト)</th>
+                        <td><ul><li>自立型個別指導と一斉授業の利点を持つ少人数指導部門</li><li><strong>英語 (週1回)：</strong> 150分</li><li><strong>数学 (週1回)：</strong> 150分</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="course-card">
+                <h3>高瀬高校 クラス <span>高瀬本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>ナイトクラス</th>
+                        <td><ul><li><strong>英語 (週2回)：</strong> 120分</li><li><strong>数学 (週1回)：</strong> 120分</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+                    </div>
+
+        <div id="grade2" class="tab-content">
+            <div class="course-card">
+                <h3>観音寺第一高校 クラス <span>観音寺本部・高瀬本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>文系 <br>(イブニング/ナイト)<br><small><font size="1.8">※イブニングクラスは観音寺本部のみ</font></small></th>
+                        <td><ul><li><strong>英語 ：</strong> 長文コース(120分) / 文法コース(120分)<br>　　  　 Sコース (英語選抜クラス・150分) <small>※観音寺本部ナイトクラスのみ</small></li><li><strong>数学 (週1回)：</strong> 文系コース(120分)</li></ul></td>
+                    </tr>
+                    <tr>
+                        <th>理系 <br>(ナイト)</th>
+                        <td><ul><li><strong>英語 (週2回)：</strong> 長文コース(120分) / 文法コース(120分)</li><li><strong>数学 (週2回)：</strong> αコース(120分) / βコース(120分)</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="course-card">
+                <h3>高瀬高校 クラス <span>高瀬本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>ナイトクラス</th>
+                        <td><ul><li><strong>英語 (週2回)：</strong> 文法コース(120分) / 長文構文コース(120分)</li><li><strong>数学 (週1回)：</strong> 理系コース(120分) / 総合文系・文系コース(120分)</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="course-card">
+                <h3>丸亀高校・坂出高校 クラス <span>高瀬本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>高校ACT (ナイト)</th>
+                        <td><ul><li><strong>英語 (週1回)：</strong> 150分</li><li><strong>数学 (週1回)：</strong> 150分</li></ul></td>
+                    </tr>
                 </table>
             </div>
         </div>
-        <!-- 他の学年タブの内容は適宜お入れください -->
+
+        <div id="grade3" class="tab-content">
+            <div class="course-card">
+                <h3>湯口塾ライブ授業 <span>観音寺本部・高瀬本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>対象高校</th>
+                        <td>観音寺第一高校・高瀬高校</td>
+                    </tr>
+                    <tr>
+                        <th>イブニング/ナイト<br><small><font size="1.8">※イブニングクラスは観音寺本部のみ</font></small></th>
+                        <td><ul><li><strong>英語：</strong> 共通テスト対策コース / 私大基礎・応用コース</li><li><strong>数学：</strong> 共通テスト対策コース / 数学Ⅲ(観一) <br> &emsp;&emsp;&emsp;&nbsp;理系コース(高瀬高校) / 総合・文系コース(高瀬高校)</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="course-card">
+                <h3>丸亀高校・坂出高校 クラス <span>丸亀本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>高校ACT</th>
+                        <td><ul><li><strong>英語 (週1回)：</strong> 150分</li><li><strong>数学 (週1回)：</strong> 150分</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="course-card">
+                <h3>代ゼミサテラインコース <span>映像授業</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>特徴</th>
+                        <td><ul><li>基礎講座から共通テスト対策・難関大レベルまで対応</li><li>湯口塾の一斉授業との併用が可能</li><li><strong>対応科目：</strong> 英語・数学・国語・地歴・公民・理科・小論文</li></ul></td>
+                    </tr>
+                </table>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://sateline.yozemi.ac.jp/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: var(--accent-color); color: #fff; padding: 12px 24px; border-radius: 30px; font-weight: bold; font-size: 15px; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
+                        代ゼミサテライン予備校 公式サイトへ
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kosen" class="tab-content">
+            <div class="course-card">
+                <h3>香川高専 (詫間キャンパス) クラス <span>高瀬本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>1～2年生<br>(3年生のクラスは未開講)</th>
+                        <td><ul><li><strong>数学：</strong> 土曜 14:00〜16:00 (120分)</li><li><strong>英語：</strong> 土曜 16:10〜17:40 (90分)</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="course-card">
+                <h3>香川西高校 (特進科) クラス <span>高瀬本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>1～3年生</th>
+                        <td><ul><li><strong>数学 (週1回)：</strong>120分</li></ul></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </section>
 
     <!-- 4. 合格実績セクション -->
     <section id="results" class="results">
         <h2 class="section-title animate-up">合格実績</h2>
+        <p class="section-desc animate-up">全塾生の進学先です。各年度のタイトルをタップして詳細をご覧ください。</p>
+
         <div class="accordion-wrapper animate-up">
+            
             <div class="accordion-item active">
                 <div class="accordion-header" onclick="toggleAccordion(this)">2025年度 合格大学</div>
                 <div class="accordion-content">
-                    <div class="accordion-body" style="text-align: center;">
-                        <img src="./2025goukakujisseki.png" alt="2025年度実績">
+                    <div class="accordion-body" style="text-align: center; background-color: #f4f6f9;">
+                        <img src="./2025goukakujisseki.png" alt="2025年度 合格大学実績" style="width: 100%; max-width: 800px; height: auto; border: 1px solid #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background-color: #fff;">
                     </div>
                 </div>
             </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">2024年度 合格大学</div>
+                <div class="accordion-content">
+                    <div class="accordion-body" style="text-align: center; background-color: #f4f6f9;">
+                        <img src="./2024goukakujisseki.png" alt="2024年度 合格大学実績" style="width: 100%; max-width: 800px; height: auto; border: 1px solid #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background-color: #fff;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">2023年度 合格大学</div>
+                <div class="accordion-content">
+                    <div class="accordion-body" style="text-align: center; background-color: #f4f6f9;">
+                        <img src="./2023goukakujisseki.png" alt="2023年度 合格大学実績" style="width: 100%; max-width: 800px; height: auto; border: 1px solid #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background-color: #fff;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">2022年度 合格大学</div>
+                <div class="accordion-content">
+                    <div class="accordion-body" style="text-align: center; background-color: #f4f6f9;">
+                        <img src="./2022goukakujisseki.png" alt="2022年度 合格大学実績" style="width: 100%; max-width: 800px; height: auto; border: 1px solid #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background-color: #fff;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">2021年度 合格大学</div>
+                <div class="accordion-content">
+                    <div class="accordion-body" style="text-align: center; background-color: #f4f6f9;">
+                        <img src="./2021goukakujisseki.png" alt="2021年度 合格大学実績" style="width: 100%; max-width: 800px; height: auto; border: 1px solid #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background-color: #fff;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">2020年度 合格大学</div>
+                <div class="accordion-content">
+                    <div class="accordion-body" style="text-align: center; background-color: #f4f6f9;">
+                        <img src="./2020goukakujisseki.png" alt="2020年度 合格大学実績" style="width: 100%; max-width: 800px; height: auto; border: 1px solid #ddd; box-shadow: 0 4px 10px rgba(0,0,0,0.05); background-color: #fff;">
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <!-- 5. アクセスセクション -->
     <section id="access" class="access">
         <h2 class="section-title animate-up">アクセス</h2>
+        <p class="section-desc animate-up">教室へのアクセス情報です。お問い合わせはお電話にて承っております。</p>
+
         <div class="access-container animate-up">
+            
+            <!-- 高瀬本部教室 -->
             <div class="access-card">
                 <h3>高瀬本部教室</h3>
-                <p>〒767-0003 香川県三豊市高瀬町比地中1317-7</p>
+                <p>〒767-0003<br>香川県三豊市高瀬町比地中1317-7</p>
+                
+                <!-- Google Maps埋め込み -->
                 <div class="map-wrapper">
-                    <iframe src="https://maps.google.com/maps?q=湯口塾%20高瀬本部&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+                    <iframe src="https://maps.google.com/maps?q=香川県三豊市高瀬町比地中1317-7&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
+                
+                <!-- 指定されたマップリンク -->
+                <a href="https://maps.app.goo.gl/ZJu6Rbe6pHdWfwtZ7" target="_blank" rel="noopener noreferrer" class="map-link">Google Mapsで開く</a>
+                
+                <!-- 電話番号 (タップで発信可能) -->
                 <p class="tel"><a href="tel:0120273262">TEL: 0120-27-3262</a></p>
             </div>
+            
+            <!-- 観音寺本部教室 -->
             <div class="access-card">
                 <h3>観音寺本部教室</h3>
-                <p>〒768-0069 香川県観音寺市茂木町2丁目3-39</p>
+                <p>〒768-0069<br>香川県観音寺市茂木町2丁目3-39</p>
+                
+                <!-- Google Maps埋め込み -->
                 <div class="map-wrapper">
-                    <iframe src="https://maps.google.com/maps?q=香川県観音寺市茂木町2丁目3-39&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+                    <iframe src="https://maps.google.com/maps?q=香川県観音寺市茂木町2丁目3-39&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
+
+                <!-- 指定されたマップリンク -->
+                <a href="https://maps.app.goo.gl/LV3Q91miBEq8c1yP6" target="_blank" rel="noopener noreferrer" class="map-link">Google Mapsで開く</a>
+                
+                <!-- 電話番号 (タップで発信可能。市外局番0875を補完) -->
                 <p class="tel"><a href="tel:0875241101">TEL: 0875-24-1101</a></p>
             </div>
+
         </div>
     </section>
 
+    <!-- フッター -->
     <footer>
         <p>&copy; 2026 湯口塾高校部 All Rights Reserved.</p>
     </footer>
 
+    <!-- スクリプト -->
     <script>
-        // ハンバーガーメニュー
+        // --- ハンバーガーメニュー開閉機能 ---
         document.addEventListener('DOMContentLoaded', () => {
-            const btn = document.getElementById('hamburger-btn');
-            const menu = document.getElementById('nav-menu');
-            btn.addEventListener('click', () => {
-                btn.classList.toggle('open');
-                menu.classList.toggle('open');
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const navMenu = document.getElementById('nav-menu');
+            const navItems = document.querySelectorAll('.nav-item');
+
+            // ボタンクリックでメニューをトグル
+            hamburgerBtn.addEventListener('click', () => {
+                hamburgerBtn.classList.toggle('open');
+                navMenu.classList.toggle('open');
+            });
+
+            // メニューのリンクをクリックしたらメニューを閉じる
+            navItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    hamburgerBtn.classList.remove('open');
+                    navMenu.classList.remove('open');
+                });
             });
         });
 
-        // 画像拡大モーダル
+        // --- 画像拡大（モーダル）機能 ---
         document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById("imageModal");
-            const trigger = document.getElementById("hero-img-trigger");
+            const imgTrigger = document.getElementById("hero-img-trigger");
             const modalImg = document.getElementById("expandedImg");
-            const close = document.getElementById("modalClose");
-            if(trigger) {
-                trigger.onclick = () => { modal.classList.add('show'); modalImg.src = trigger.src; }
+            const closeBtn = document.getElementById("modalClose");
+
+            // 画像クリックでモーダルを開く
+            if(imgTrigger) {
+                imgTrigger.addEventListener('click', function(){
+                    modal.classList.add('show');
+                    modalImg.src = this.src;
+                });
             }
-            if(close) { close.onclick = () => modal.classList.remove('show'); }
-            window.onclick = (e) => { if(e.target == modal) modal.classList.remove('show'); }
+
+            // 閉じるボタンでモーダルを閉じる
+            if(closeBtn) {
+                closeBtn.addEventListener('click', function() {
+                    modal.classList.remove('show');
+                });
+            }
+
+            // モーダルの背景クリックでも閉じる
+            window.addEventListener('click', function(event) {
+                if (event.target == modal) {
+                    modal.classList.remove('show');
+                }
+            });
         });
 
-        // アニメーション
+        // --- スクロールアニメーション ---
         document.addEventListener('DOMContentLoaded', () => {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.animate-up').forEach(el => observer.observe(el));
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const animatedElements = document.querySelectorAll('.animate-up');
+            animatedElements.forEach(el => observer.observe(el));
         });
 
-        // タブ
+        // --- タブ切り替え機能 ---
         function openTab(evt, tabId) {
-            const contents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < contents.length; i++) contents[i].classList.remove("active");
-            const btns = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < btns.length; i++) btns[i].classList.remove("active");
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            const tabBtns = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("active");
+            }
             document.getElementById(tabId).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
 
-        // アコーディオン
-        function toggleAccordion(el) {
-            el.parentElement.classList.toggle('active');
+        // --- アコーディオン開閉機能 ---
+        function toggleAccordion(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
         }
     </script>
 </body>
