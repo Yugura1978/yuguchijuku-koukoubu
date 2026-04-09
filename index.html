@@ -19,6 +19,10 @@
             --border-color: #e5e7eb;
         }
 
+        html {
+            scroll-behavior: smooth; /* スムーズスクロールを追加 */
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -644,13 +648,200 @@
             cursor: pointer;
         }
 
-        /* === フッター === */
-        footer {
-            background-color: var(--text-color);
-            color: #ffffff;
+        /* === 6. お問い合わせセクションのスタイル === */
+        .contact {
+            background-color: var(--bg-light); /* アクセスセクションと交互の背景色 */
+        }
+        .contact-form-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--main-color);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border-top: 5px solid var(--accent-color);
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        .form-group label span.required {
+            background-color: var(--accent-color);
+            color: #fff;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: normal;
+            vertical-align: middle;
+        }
+        .form-group label span.optional {
+            background-color: var(--text-light);
+            color: #fff;
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: normal;
+            vertical-align: middle;
+        }
+        .form-control {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: #fafafa;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(237, 26, 61, 0.1);
+            background-color: #fff;
+        }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 180px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            padding: 10px 0;
+        }
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .radio-label input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-color);
+            cursor: pointer;
+        }
+        .submit-btn-wrapper {
             text-align: center;
-            padding: 30px 20px;
+            margin-top: 40px;
+        }
+        .submit-btn {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            padding: 16px 50px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(237, 26, 61, 0.3);
+        }
+        .submit-btn:hover {
+            background-color: #d11432;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(237, 26, 61, 0.4);
+        }
+
+        /* === 送信確認モーダル用スタイル === */
+        .confirm-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(3px);
+        }
+        .confirm-modal.show {
+            display: flex;
+            opacity: 1;
+            animation: modalFadeIn 0.3s ease;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .confirm-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .confirm-content h3 {
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            text-align: center;
+            font-size: 20px;
+        }
+        .confirm-detail {
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        .confirm-detail strong {
+            display: block;
+            color: var(--text-light);
             font-size: 13px;
+            margin-bottom: 5px;
+        }
+        .confirm-detail div {
+            padding: 10px;
+            background-color: var(--bg-light);
+            border-radius: 6px;
+            white-space: pre-wrap;
+            border: 1px solid var(--border-color);
+            word-break: break-all;
+        }
+        .confirm-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .confirm-actions button {
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        .btn-back {
+            background-color: #e5e7eb;
+            color: #333;
+        }
+        .btn-back:hover {
+            background-color: #d1d5db;
+        }
+        .btn-send-final {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+        .btn-send-final:hover {
+            background-color: #d11432;
         }
 
         /* === レスポンシブ === */
@@ -661,7 +852,18 @@
             .course-table th, .course-table td { padding: 10px; font-size: 13px; display: block; width: 100%; }
             .course-table th { border-bottom: none; }
             .tab-btn { padding: 10px 16px; font-size: 14px; width: 48%; text-align: center; }
-            .tabs { justify-content: space-between; }
+            /* スマホで5つのタブボタンがある場合の余白調整 */
+            .tabs { justify-content: flex-start; }
+            .tab-btn:last-child { width: 100%; } /* 最後のタブを全幅に */
+
+            /* フォームのレスポンシブ */
+            .contact-form-wrapper { padding: 30px 20px; }
+            .submit-btn { width: 100%; }
+            .radio-group { flex-direction: column; gap: 15px; }
+
+            /* 確認モーダルのレスポンシブ */
+            .confirm-actions { flex-direction: column; }
+            .confirm-actions button { width: 100%; }
 
             /* --- ハンバーガーメニュー用のスタイル --- */
             .hamburger {
@@ -683,7 +885,7 @@
             }
             /* メニューが開いた状態 */
             .nav-links.open {
-                max-height: 300px;
+                max-height: 400px; /* リンクが増えたので高さを調整 */
                 padding: 15px 0;
             }
             .nav-links a {
@@ -728,6 +930,7 @@
             <a href="#courses" class="nav-item">コース紹介</a>
             <a href="#results" class="nav-item">合格実績</a>
             <a href="#access" class="nav-item">アクセス</a>
+            <a href="#contact" class="nav-item">お問い合わせ</a> <!-- 追加 -->
         </nav>
     </header>
 
@@ -792,6 +995,7 @@
             <button class="tab-btn" onclick="openTab(event, 'grade2')">高校2年生</button>
             <button class="tab-btn" onclick="openTab(event, 'grade3')">高校3年生</button>
             <button class="tab-btn" onclick="openTab(event, 'kosen')">高専・その他</button>
+            <button class="tab-btn" onclick="openTab(event, 'yozemi')">代ゼミサテライン</button>
         </div>
 
         <div id="grade1" class="tab-content active">
@@ -885,21 +1089,6 @@
                     </tr>
                 </table>
             </div>
-            <div class="course-card">
-                <h3>代ゼミサテラインコース <span>映像授業</span></h3>
-                <table class="course-table">
-                    <tr>
-                        <th>特徴</th>
-                        <td><ul><li>基礎講座から共通テスト対策・難関大レベルまで対応</li><li>湯口塾の一斉授業との併用が可能</li><li><strong>対応科目：</strong> 英語・数学・国語・地歴・公民・理科・小論文</li></ul></td>
-                    </tr>
-                </table>
-                
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="https://sateline.yozemi.ac.jp/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: var(--accent-color); color: #fff; padding: 12px 24px; border-radius: 30px; font-weight: bold; font-size: 15px; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
-                        代ゼミサテライン予備校 公式サイトへ
-                    </a>
-                </div>
-            </div>
         </div>
 
         <div id="kosen" class="tab-content">
@@ -920,6 +1109,24 @@
                         <td><ul><li><strong>数学 (週1回)：</strong>120分</li></ul></td>
                     </tr>
                 </table>
+            </div>
+        </div>
+
+        <div id="yozemi" class="tab-content">
+            <div class="course-card">
+                <h3>代ゼミサテラインコース <span>観音寺本部・高瀬本部</span></h3>
+                <table class="course-table">
+                    <tr>
+                        <th>映像授業<br>対象：高校1年生～既卒生</th>
+                        <td><ul><li>基礎講座から共通テスト対策・難関大レベルまで対応</li><li>湯口塾の一斉授業との併用が可能</li><li><strong>対応科目：</strong> 英語・数学・国語・地歴・公民・理科・小論文</li></ul></td>
+                    </tr>
+                </table>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://sateline.yozemi.ac.jp/" target="_blank" rel="noopener noreferrer" style="display: inline-block; background-color: var(--accent-color); color: #fff; padding: 12px 24px; border-radius: 30px; font-weight: bold; font-size: 15px; transition: opacity 0.3s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
+                        代ゼミサテライン予備校 公式サイトへ
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1032,6 +1239,87 @@
         </div>
     </section>
 
+    <!-- 6. お問い合わせセクション -->
+    <section id="contact" class="contact">
+        <h2 class="section-title animate-up">お問い合わせ</h2>
+        <p class="section-desc animate-up">入塾に関するご相談、体験授業のお申し込みなど、お気軽にお問い合わせください。</p>
+
+        <div class="contact-form-wrapper animate-up">
+            <!-- id="contactForm" を追加 -->
+            <form id="contactForm" action="mailto:eigonsu@yugura.com" method="POST" enctype="text/plain">
+                
+                <div class="form-group">
+                    <label for="name">お名前 <span class="required">必須</span></label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="例：湯口 太郎" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="kana">フリガナ <span class="required">必須</span></label>
+                    <input type="text" id="kana" name="kana" class="form-control" placeholder="例：ユグチ タロウ" required>
+                </div>
+
+ 　　　　　　　 <div class="form-group">
+                    <label for="phone">電話番号 <span class="required">必須</span></label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="例：090-1234-5678">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">メールアドレス <span class="optional">任意</span></label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="例：info@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="grade">学年 <span class="required">必須</span></label>
+                    <select id="grade" name="grade" class="form-control" required>
+                        <option value="" disabled selected>選択してください</option>
+                        <option value="高校1年生">高校1年生</option>
+                        <option value="高校2年生">高校2年生</option>
+                        <option value="高校3年生">高校3年生</option>
+                        <option value="既卒生">既卒生</option>
+                   　</select>
+                </div>
+
+                <div class="form-group">
+                    <label>通塾を希望する校舎 <span class="required">必須</span></label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="campus" value="高瀬本部" required> 高瀬本部
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="campus" value="観音寺本部"> 観音寺本部
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">お問い合わせ内容 <span class="required">必須</span></label>
+                    <textarea id="message" name="message" class="form-control" placeholder="ご質問やご相談内容、体験授業のご希望などをご自由にご記入ください。" required></textarea>
+                </div>
+
+                <div class="submit-btn-wrapper">
+                    <!-- id="btnSubmitForm" を追加、type は submit のまま -->
+                    <button type="submit" id="btnSubmitForm" class="submit-btn">送信する</button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- 送信確認モーダル (追加部分) -->
+    <div id="confirmModal" class="confirm-modal">
+        <div class="confirm-content">
+            <h3>入力内容の確認</h3>
+            <div id="confirmDetails"></div>
+            <p style="font-size: 13px; color: var(--text-light); margin-top: 20px; text-align: center;">
+                ※以下のボタンを押すと、お使いのメールソフトが起動します。内容を確認のうえ、メールソフト上で送信ボタンを押してください。
+            </p>
+            <div class="confirm-actions">
+                <button type="button" class="btn-back" id="btnBack">修正する</button>
+                <button type="button" class="btn-send-final" id="btnSendConfirm">メールソフトを起動して送信</button>
+            </div>
+        </div>
+    </div>
+
     <!-- フッター -->
     <footer>
         <p>&copy; 2026 湯口塾高校部 All Rights Reserved.</p>
@@ -1088,6 +1376,66 @@
                     modal.classList.remove('show');
                 }
             });
+        });
+
+        // --- お問い合わせフォームの確認モーダル機能 (追加部分) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactForm = document.getElementById('contactForm');
+            const confirmModal = document.getElementById('confirmModal');
+            const confirmDetails = document.getElementById('confirmDetails');
+            const btnBack = document.getElementById('btnBack');
+            const btnSendConfirm = document.getElementById('btnSendConfirm');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    // 通常の送信を一旦キャンセルしてモーダルを表示
+                    e.preventDefault(); 
+                    
+                    const formData = new FormData(contactForm);
+                    let html = '';
+                    
+                    // 表示用の項目名マッピング
+                    const labelMap = {
+                        'name': 'お名前',
+                        'kana': 'フリガナ',
+                        'phone': '電話番号',
+                        'email': 'メールアドレス',
+                        'grade': '学年',
+                        'campus': '希望校舎',
+                        'message': 'お問い合わせ内容'
+                    };
+
+                    for (let [key, value] of formData.entries()) {
+                        if (labelMap[key]) {
+                            // 簡易的なサニタイズ処理と改行の保持
+                            const safeValue = value.replace(/&/g, '&amp;')
+                                                   .replace(/</g, '&lt;')
+                                                   .replace(/>/g, '&gt;')
+                                                   .replace(/"/g, '&quot;');
+                            
+                            html += `<div class="confirm-detail">
+                                        <strong>${labelMap[key]}</strong>
+                                        <div>${safeValue || '（未入力）'}</div>
+                                     </div>`;
+                        }
+                    }
+
+                    confirmDetails.innerHTML = html;
+                    confirmModal.classList.add('show');
+                });
+
+                // 「修正する」ボタンの処理
+                btnBack.addEventListener('click', function() {
+                    confirmModal.classList.remove('show');
+                });
+
+                // 「メールソフトを起動して送信」ボタンの処理
+                btnSendConfirm.addEventListener('click', function() {
+                    confirmModal.classList.remove('show');
+                    // JavaScriptから強制的にsubmitイベントを発火させずに、直接送信を実行
+                    HTMLFormElement.prototype.submit.call(contactForm);
+                });
+            }
         });
 
         // --- スクロールアニメーション ---
