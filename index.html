@@ -751,6 +751,12 @@
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(237, 26, 61, 0.4);
         }
+        .submit-btn:disabled {
+            background-color: #a0a0a0;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
 
         /* === 送信確認モーダル用スタイル === */
         .confirm-modal {
@@ -828,6 +834,14 @@
             border: none;
             font-size: 15px;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .confirm-actions button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
         .btn-back {
             background-color: #e5e7eb;
@@ -1245,33 +1259,33 @@
         <p class="section-desc animate-up">入塾に関するご相談、体験授業のお申し込みなど、お気軽にお問い合わせください。</p>
 
         <div class="contact-form-wrapper animate-up">
-            <!-- JavaScriptで制御するため、action等の属性を削除 -->
+            <!-- JavaScriptで完全に裏側で送信するため、action等の属性を削除 -->
             <form id="contactForm">
                 
                 <div class="form-group">
                     <label for="name">お名前 <span class="required">必須</span></label>
-                    <input type="text" id="name" name="name" class="form-control" placeholder="例：湯口 太郎" required>
+                    <input type="text" id="name" name="お名前" class="form-control" placeholder="例：湯口 太郎" required>
                 </div>
 
                 <div class="form-group">
                     <label for="kana">フリガナ <span class="required">必須</span></label>
-                    <input type="text" id="kana" name="kana" class="form-control" placeholder="例：ユグチ タロウ" required>
+                    <input type="text" id="kana" name="フリガナ" class="form-control" placeholder="例：ユグチ タロウ" required>
                 </div>
 
  　　　　　　　 <div class="form-group">
                     <label for="phone">電話番号 <span class="required">必須</span></label>
-                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="例：090-1234-5678" required>
+                    <input type="tel" id="phone" name="電話番号" class="form-control" placeholder="例：090-1234-5678" required>
                 </div>
 
                 <div class="form-group">
                     <label for="email">メールアドレス <span class="optional">任意</span></label>
-                    <!-- required属性を削除 -->
-                    <input type="email" id="email" name="email" class="form-control" placeholder="例：info@example.com">
+                    <!-- 任意のまま -->
+                    <input type="email" id="email" name="メールアドレス" class="form-control" placeholder="例：info@example.com">
                 </div>
 
                 <div class="form-group">
                     <label for="grade">学年 <span class="required">必須</span></label>
-                    <select id="grade" name="grade" class="form-control" required>
+                    <select id="grade" name="学年" class="form-control" required>
                         <option value="" disabled selected>選択してください</option>
                         <option value="高校1年生">高校1年生</option>
                         <option value="高校2年生">高校2年生</option>
@@ -1284,17 +1298,17 @@
                     <label>通塾を希望する校舎 <span class="required">必須</span></label>
                     <div class="radio-group">
                         <label class="radio-label">
-                            <input type="radio" name="campus" value="高瀬本部" required> 高瀬本部
+                            <input type="radio" name="希望校舎" value="高瀬本部" required> 高瀬本部
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="campus" value="観音寺本部"> 観音寺本部
+                            <input type="radio" name="希望校舎" value="観音寺本部"> 観音寺本部
                         </label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="message">お問い合わせ内容 <span class="required">必須</span></label>
-                    <textarea id="message" name="message" class="form-control" placeholder="ご質問やご相談内容、体験授業のご希望などをご自由にご記入ください。" required></textarea>
+                    <textarea id="message" name="お問い合わせ内容" class="form-control" placeholder="ご質問やご相談内容、体験授業のご希望などをご自由にご記入ください。" required></textarea>
                 </div>
 
                 <div class="submit-btn-wrapper">
@@ -1302,27 +1316,25 @@
                 </div>
 
             </form>
+            <!-- 隠しiframe（バックグラウンド送信に使用） -->
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
         </div>
     </section>
 
-    <!-- 送信確認モーダル -->
+    <!-- 送信確認・完了モーダル -->
     <div id="confirmModal" class="confirm-modal">
         <div class="confirm-content">
-            <h3>入力内容の確認</h3>
+            <h3 id="modalTitle">入力内容の確認</h3>
             <div id="confirmDetails"></div>
-            
-            <p id="confirmDesc" style="font-size: 13px; color: var(--text-light); margin-top: 20px; text-align: center;">
-                ※以下のボタンを押すと、お使いのメールソフトが起動します。内容を確認のうえ、メールソフト上で送信ボタンを押してください。
-            </p>
             
             <div class="confirm-actions" id="confirmActions">
                 <button type="button" class="btn-back" id="btnBack">修正する</button>
-                <button type="button" class="btn-send-final" id="btnSendConfirm">メールソフトを起動して送信</button>
+                <button type="button" class="btn-send-final" id="btnSendConfirm">この内容で送信する</button>
             </div>
             
-            <!-- メールソフト起動後に表示される「閉じる」ボタン -->
+            <!-- 送信完了後に表示される「閉じる」ボタン -->
             <div class="confirm-actions" id="closeActions" style="display: none;">
-                <button type="button" class="btn-back" id="btnCloseModal">閉じる</button>
+                <button type="button" class="btn-send-final" id="btnCloseModal" style="width:100%;">閉じる</button>
             </div>
         </div>
     </div>
@@ -1334,19 +1346,25 @@
 
     <!-- スクリプト -->
     <script>
+        // =========================================================================
+        // 【重要設定】フォーム送信サービス（SSGFormやFormspreeなど）で発行されたURLを
+        // 以下の「""」の中に貼り付けてください。
+        // 例: const endpointUrl = "https://ssgform.com/s/HWphbw0wU2Su";
+        // =========================================================================
+        const endpointUrl = "https://ssgform.com/s/HWphbw0wU2Su"; 
+
+
         // --- ハンバーガーメニュー開閉機能 ---
         document.addEventListener('DOMContentLoaded', () => {
             const hamburgerBtn = document.getElementById('hamburger-btn');
             const navMenu = document.getElementById('nav-menu');
             const navItems = document.querySelectorAll('.nav-item');
 
-            // ボタンクリックでメニューをトグル
             hamburgerBtn.addEventListener('click', () => {
                 hamburgerBtn.classList.toggle('open');
                 navMenu.classList.toggle('open');
             });
 
-            // メニューのリンクをクリックしたらメニューを閉じる
             navItems.forEach(item => {
                 item.addEventListener('click', () => {
                     hamburgerBtn.classList.remove('open');
@@ -1362,7 +1380,6 @@
             const modalImg = document.getElementById("expandedImg");
             const closeBtn = document.getElementById("modalClose");
 
-            // 画像クリックでモーダルを開く
             if(imgTrigger) {
                 imgTrigger.addEventListener('click', function(){
                     modal.classList.add('show');
@@ -1370,14 +1387,12 @@
                 });
             }
 
-            // 閉じるボタンでモーダルを閉じる
             if(closeBtn) {
                 closeBtn.addEventListener('click', function() {
                     modal.classList.remove('show');
                 });
             }
 
-            // モーダルの背景クリックでも閉じる
             window.addEventListener('click', function(event) {
                 if (event.target == modal) {
                     modal.classList.remove('show');
@@ -1385,7 +1400,7 @@
             });
         });
 
-        // --- お問い合わせフォームの確認モーダル機能 ---
+        // --- お問い合わせフォームの裏側送信＆確認モーダル機能 ---
         document.addEventListener('DOMContentLoaded', () => {
             const contactForm = document.getElementById('contactForm');
             const confirmModal = document.getElementById('confirmModal');
@@ -1395,49 +1410,41 @@
             const confirmActions = document.getElementById('confirmActions');
             const closeActions = document.getElementById('closeActions');
             const btnCloseModal = document.getElementById('btnCloseModal');
-            const confirmDesc = document.getElementById('confirmDesc');
+            const modalTitle = document.getElementById('modalTitle');
+            const hiddenIframe = document.getElementById('hidden_iframe');
 
             let currentFormData = null;
-
-            // 表示用の項目名マッピング
-            const labelMap = {
-                'name': 'お名前',
-                'kana': 'フリガナ',
-                'phone': '電話番号',
-                'email': 'メールアドレス',
-                'grade': '学年',
-                'campus': '希望校舎',
-                'message': 'お問い合わせ内容'
-            };
+            let isSubmitted = false;
 
             if (contactForm) {
+                // フォームの送信先とターゲットを設定
+                contactForm.action = endpointUrl;
+                contactForm.method = "POST";
+                contactForm.target = "hidden_iframe";
+
                 // 送信（確認画面へ進む）ボタンが押されたときの処理
                 contactForm.addEventListener('submit', function(e) {
-                    // 通常の送信を一旦キャンセル
                     e.preventDefault(); 
-                    
                     currentFormData = new FormData(contactForm);
                     let html = '';
 
-                    // 確認画面用のHTMLを生成
+                    // 確認画面用のHTMLを生成 (name属性をそのまま見出しに使用)
                     for (let [key, value] of currentFormData.entries()) {
-                        if (labelMap[key]) {
-                            // 簡易的なサニタイズ処理
-                            const safeValue = value.replace(/&/g, '&amp;')
-                                                   .replace(/</g, '&lt;')
-                                                   .replace(/>/g, '&gt;')
-                                                   .replace(/"/g, '&quot;');
-                            
-                            html += `<div class="confirm-detail">
-                                        <strong>${labelMap[key]}</strong>
-                                        <div>${safeValue || '（未入力）'}</div>
-                                     </div>`;
-                        }
+                        const safeValue = value.replace(/&/g, '&amp;')
+                                               .replace(/</g, '&lt;')
+                                               .replace(/>/g, '&gt;')
+                                               .replace(/"/g, '&quot;');
+                        
+                        html += `<div class="confirm-detail">
+                                    <strong>${key}</strong>
+                                    <div>${safeValue || '（未入力）'}</div>
+                                 </div>`;
                     }
 
                     // モーダルの状態を初期表示（確認画面）にリセット
+                    modalTitle.innerText = "入力内容の確認";
+                    modalTitle.style.borderBottom = "2px solid var(--border-color)";
                     confirmDetails.innerHTML = html;
-                    confirmDesc.style.display = 'block';
                     confirmActions.style.display = 'flex';
                     closeActions.style.display = 'none';
 
@@ -1450,49 +1457,69 @@
                     confirmModal.classList.remove('show');
                 });
 
-                // 「メールソフトを起動して送信」ボタンの処理
+                // 「この内容で送信する」ボタンの処理（ここで直接裏側送信を行う）
                 btnSendConfirm.addEventListener('click', function() {
                     if (!currentFormData) return;
-
-                    const to = "eigonsu@yugura.com";
-                    const subject = "【湯口塾高校部】Webサイトからのお問い合わせ";
-                    let body = "以下の内容でお問い合わせがありました。\n\n";
-
-                    // フォームデータからメール本文を構築
-                    for (let [key, value] of currentFormData.entries()) {
-                        if (labelMap[key]) {
-                            body += `【${labelMap[key]}】\n${value || "（未入力）"}\n\n`;
-                        }
+                    
+                    // URLが設定されていない場合の警告
+                    if (endpointUrl === "ここに発行されたURLを貼り付けてください" || endpointUrl === "") {
+                        alert("※設定エラー※\nコード内の「endpointUrl」にフォーム用URLが設定されていません。\nSSGFormなどで発行したURLを貼り付けてください。");
+                        return;
                     }
 
-                    // 文字化け対策：encodeURIComponent を使用して安全なリンクを作成
-                    const mailtoUri = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                    
-                    // メールソフトを強制起動（パソコンでも動作します）
-                    window.location.href = mailtoUri;
+                    isSubmitted = true;
 
-                    // メーラー起動後、モーダルの内容を「送信案内」に切り替える
-                    confirmDesc.style.display = 'none';
-                    confirmDetails.innerHTML = `
-                        <div style="text-align: center; padding: 20px 0;">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 15px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                            <h4 style="font-size: 18px; color: var(--text-color); margin-bottom: 10px;">メールソフトを起動しました</h4>
-                            <p style="font-size: 14px; color: var(--text-light); line-height: 1.6;">
-                                ご利用の端末のメールソフトが起動します。<br>
-                                内容をご確認の上、メールソフトの<br><strong>送信ボタンを押して</strong>完了してください。
-                            </p>
-                        </div>
+                    // ボタンを「送信中」にして二重送信を防ぐ
+                    btnSendConfirm.innerHTML = `
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>
+                        送信中...
                     `;
-                    confirmActions.style.display = 'none';
-                    closeActions.style.display = 'flex';
+                    btnSendConfirm.disabled = true;
+                    btnBack.disabled = true;
+
+                    // サーバーへ直接送信（隠しiframeへ向けてフォームを送信）
+                    HTMLFormElement.prototype.submit.call(contactForm);
                 });
 
-                // 「閉じる」ボタンの処理
+                // iframeのロード完了（＝送信完了）を検知
+                hiddenIframe.addEventListener('load', function() {
+                    if (isSubmitted) {
+                        // 送信成功時：完了画面に切り替え
+                        modalTitle.innerText = "送信完了";
+                        modalTitle.style.borderBottom = "none";
+                        confirmDetails.innerHTML = `
+                            <div style="text-align: center; padding: 10px 0 20px;">
+                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 20px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                <p style="font-size: 15px; color: var(--text-color); line-height: 1.8;">
+                                    お問い合わせありがとうございます。<br>
+                                    メッセージの送信が完了しました。<br>
+                                    内容を確認次第、担当者よりご連絡いたします。
+                                </p>
+                            </div>
+                        `;
+                        confirmActions.style.display = 'none';
+                        closeActions.style.display = 'flex';
+                        
+                        // フォームの入力内容を空にする
+                        contactForm.reset();
+                        isSubmitted = false;
+
+                        // ボタンの状態を元に戻す
+                        btnSendConfirm.innerText = "この内容で送信する";
+                        btnSendConfirm.disabled = false;
+                        btnBack.disabled = false;
+                    }
+                });
+
+                // 完了後の「閉じる」ボタンの処理
                 btnCloseModal.addEventListener('click', function() {
                     confirmModal.classList.remove('show');
-                    // 必要に応じてフォームをリセットする場合は以下のコメントアウトを外します
-                    // contactForm.reset(); 
                 });
+                
+                // CSSにスピナー用のアニメーションを動的に追加
+                const style = document.createElement('style');
+                style.innerHTML = `@keyframes spin { 100% { transform: rotate(360deg); } }`;
+                document.head.appendChild(style);
             }
         });
 
