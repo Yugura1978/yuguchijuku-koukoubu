@@ -132,14 +132,52 @@
             position: relative;
             padding-top: 100px;
             min-height: 100vh;
-            background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
-            background-attachment: fixed;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            overflow: hidden; /* 擬似要素のはみ出しを防ぐ */
         }
+
+        /* 背景スライドショーの設定 (高瀬本部・観音寺本部の写真を切り替え) */
+        .hero::before,
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+
+        .hero::before {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('./takase_honbu.jpg');
+            animation: heroFade1 12s infinite;
+        }
+
+        .hero::after {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('./kanonji_honbu.jpg');
+            opacity: 0;
+            animation: heroFade2 12s infinite;
+        }
+
+        @keyframes heroFade1 {
+            0%, 40% { opacity: 1; }
+            50%, 90% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes heroFade2 {
+            0%, 40% { opacity: 0; }
+            50%, 90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
         .hero-content {
             width: 100%;
             max-width: 1000px;
@@ -1165,7 +1203,7 @@
                 </div>
                 <div class="highlight-item">
                     <span class="highlight-badge">高瀬高校</span>
-                    <span class="highlight-text">国公立大学合格者<span class="highlight-number">2名</span>輩出！</span>
+                    <span class="highlight-text">国立大学合格者<span class="highlight-number">2名</span>輩出！</span>
                 </div>
             </div>
             
@@ -1180,7 +1218,7 @@
                 <ul class="notice-list">
                     <li><span class="notice-date">2026.04.01</span><span class="badge badge-red">休校連絡</span> <div style="width: 100%;">4/29(水)～5/5(火)はお休みです。</div></li>
                     <li><span class="notice-date">2026.04.01</span><span class="badge badge-blue">お知らせ</span> <div style="width: 100%;">新年度のコース案内・体験授業の受付を随時行っています。</div></li>
-                    <li><span class="notice-date">2026.03.20</span><span class="badge badge-green">合格速報</span> <div style="width: 100%;">2025年度の大学合格実績を掲載しました。</div></li>
+                    <li><span class="notice-date">2026.03.20</span><span class="badge badge-green">合格速報</span> <div style="width: 100%;">2026年度の大学合格実績を掲載しました。</div></li>
                 </ul>
             </div>
         </div>
